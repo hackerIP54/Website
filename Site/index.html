@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Developer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>🎮 Creator Hub</h2>
+
+        <ul>
+            <li class="active">Dashboard</li>
+            <li>Meine Spiele</li>
+            <li>Analytics</li>
+            <li>Monetarisierung</li>
+            <li>Einstellungen</li>
+        </ul>
+    </aside>
+
+    <main class="main">
+
+        <header>
+            <div>
+                <h1>Developer Dashboard</h1>
+                <p>Willkommen zurück, Entwickler 👋</p>
+            </div>
+
+            <button id="themeBtn">
+                🌙 Theme wechseln
+            </button>
+        </header>
+
+        <section class="cards">
+
+            <div class="card">
+                <h3>Besuche</h3>
+                <p id="visits">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Aktive Spieler</h3>
+                <p id="players">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Robux Einnahmen</h3>
+                <p id="robux">0</p>
+            </div>
+
+        </section>
+
+        <section class="projects">
+
+            <h2>Meine Spiele</h2>
+
+            <div class="game-grid">
+
+                <div class="game-card">
+                    <img src="https://picsum.photos/400/200?1">
+                    <div class="content">
+                        <h3>Battle Arena</h3>
+                        <p>Actionreiches PvP Erlebnis.</p>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://picsum.photos/400/200?2">
+                    <div class="content">
+                        <h3>Tycoon Empire</h3>
+                        <p>Baue dein eigenes Unternehmen.</p>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://picsum.photos/400/200?3">
+                    <div class="content">
+                        <h3>Adventure World</h3>
+                        <p>Große Open World Map.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
