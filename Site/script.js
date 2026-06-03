@@ -1,8 +1,11 @@
+const userId = 3908742421; // <-- DEIN Roblox User ID
 
-const userId = 3908742421;
+function el(id){
+  return document.getElementById(id);
+}
 
-// Fetch Followers
-async function getFollowers(){
+// Load Followers (REAL)
+async function loadFollowers(){
   try {
     const res = await fetch(
       `https://friends.roblox.com/v1/users/${userId}/followers/count`
@@ -10,46 +13,44 @@ async function getFollowers(){
 
     const data = await res.json();
 
-    document.getElementById("followers").innerText =
+    el("followers").innerText =
       data.count.toLocaleString();
 
-    log("Followers: " + data.count);
-
-  } catch (e){
-    log("Error loading followers");
+  } catch (err){
+    el("followers").innerText = "Error";
   }
 }
 
-// Fake stats (Visits / Players)
-function fakeStats(){
-  document.getElementById("visits").innerText =
-    Math.floor(Math.random()*1000000).toLocaleString();
+// Load User Info (REAL)
+async function loadUser(){
+  try {
+    const res = await fetch(
+      `https://users.roblox.com/v1/users/${userId}`
+    );
 
-  document.getElementById("players").innerText =
-    Math.floor(Math.random()*5000).toLocaleString();
+    const data = await res.json();
+
+    el("username").innerText = data.name;
+    el("displayName").innerText = data.displayName;
+    el("userId").innerText = data.id;
+
+  } catch (err){
+    console.log("User load error");
+  }
 }
 
-// Log system
-function log(text){
-  const feed = document.getElementById("feed");
-  const time = new Date().toLocaleTimeString();
+// Refresh Button
+document.getElementById("refreshBtn")
+.addEventListener("click", () => {
+  loadFollowers();
+  loadUser();
+});
 
-  feed.innerHTML =
-    `[${time}] ${text}<br>` + feed.innerHTML;
-}
+// INIT
+loadFollowers();
+loadUser();
 
-// Refresh button
-document.getElementById("refresh")
-  .addEventListener("click", () => {
-    getFollowers();
-    fakeStats();
-  });
-
-// LIVE LOOP
-getFollowers();
-fakeStats();
-
+// LIVE UPDATE
 setInterval(() => {
-  getFollowers();
-  fakeStats();
+  loadFollowers();
 }, 10000);
