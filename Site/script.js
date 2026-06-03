@@ -1,28 +1,55 @@
-function counter(id, start, end, speed) {
 
-    let current = start;
+const userId = 3908742421;
 
-    const timer = setInterval(() => {
+// Fetch Followers
+async function getFollowers(){
+  try {
+    const res = await fetch(
+      `https://friends.roblox.com/v1/users/${userId}/followers/count`
+    );
 
-        current += Math.ceil((end - start) / 100);
+    const data = await res.json();
 
-        if(current >= end){
-            current = end;
-            clearInterval(timer);
-        }
+    document.getElementById("followers").innerText =
+      data.count.toLocaleString();
 
-        document.getElementById(id).innerText =
-            current.toLocaleString();
+    log("Followers: " + data.count);
 
-    }, speed);
+  } catch (e){
+    log("Error loading followers");
+  }
 }
 
-counter("visits", 0, 1245873, 20);
-counter("players", 0, 5382, 20);
-counter("robux", 0, 95843, 20);
+// Fake stats (Visits / Players)
+function fakeStats(){
+  document.getElementById("visits").innerText =
+    Math.floor(Math.random()*1000000).toLocaleString();
 
-const themeBtn = document.getElementById("themeBtn");
+  document.getElementById("players").innerText =
+    Math.floor(Math.random()*5000).toLocaleString();
+}
 
-themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-});
+// Log system
+function log(text){
+  const feed = document.getElementById("feed");
+  const time = new Date().toLocaleTimeString();
+
+  feed.innerHTML =
+    `[${time}] ${text}<br>` + feed.innerHTML;
+}
+
+// Refresh button
+document.getElementById("refresh")
+  .addEventListener("click", () => {
+    getFollowers();
+    fakeStats();
+  });
+
+// LIVE LOOP
+getFollowers();
+fakeStats();
+
+setInterval(() => {
+  getFollowers();
+  fakeStats();
+}, 10000);
