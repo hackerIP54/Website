@@ -29,27 +29,21 @@ button{
   cursor:pointer;
 }
 
-/* Hero */
-.hero{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:20px;
+/* Layout */
+.container{
   padding:30px;
 }
 
+/* Card */
 .card{
   background:#111a2e;
   padding:25px;
   border-radius:15px;
-  transition:.3s;
+  border:1px solid #1f2a44;
 }
 
-.card:hover{
-  transform:translateY(-5px);
-}
-
-.big{
-  border:1px solid #00a2ff;
+.big h2{
+  color:#94a3b8;
 }
 
 #followers{
@@ -58,22 +52,26 @@ button{
   margin-top:10px;
 }
 
-.card div{
-  font-size:2rem;
-  color:#00a2ff;
-  margin-top:10px;
-}
-
-/* Log */
-.log{
-  margin:30px;
+/* Info */
+.info{
+  margin-top:30px;
   background:#111a2e;
   padding:20px;
   border-radius:15px;
+  border:1px solid #1f2a44;
 }
 
-#feed{
+.info p{
   margin-top:10px;
-  font-size:14px;
+  color:#94a3b8;
+}
+
+/* Footer */
+.footer{
+  margin-top:40px;
+  padding:20px;
+  text-align:center;
+  background:#070b14;
+  border-top:1px solid #1f2a44;
   color:#94a3b8;
 }
