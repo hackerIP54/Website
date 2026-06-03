@@ -10,34 +10,35 @@
 <body>
 
 <header class="topbar">
-  <h1>🎮 Creator Main Site</h1>
-  <button id="refresh">Refresh</button>
+  <h1> Roblox Creator Main Site</h1>
+  <button id="refreshBtn">🔄 Refresh</button>
 </header>
 
-<section class="hero">
+<main class="container">
 
-  <div class="card big">
-    <h2>Live Followers</h2>
-    <div id="followers">0</div>
-    <p id="status">Updating...</p>
-  </div>
+  <section class="grid">
 
-  <div class="card">
-    <h3>Visits</h3>
-    <div id="visits">0</div>
-  </div>
+    <div class="card big">
+      <h2>Followers</h2>
+      <div id="followers">Loading...</div>
+      <p>Status: Live</p>
+    </div>
 
-  <div class="card">
-    <h3>Players</h3>
-    <div id="players">0</div>
-  </div>
+  </section>
 
-</section>
+  <section class="info">
+    <h3>Account Info</h3>
+    <p><b>User ID:</b> <span id="userId">-</span></p>
+    <p><b>Username:</b> <span id="username">Loading...</span></p>
+    <p><b>Display Name:</b> <span id="displayName">Loading...</span></p>
+  </section>
 
-<section class="log">
-  <h3>Live Feed</h3>
-  <div id="feed"></div>
-</section>
+</main>
+
+<footer class="footer">
+  <p>© 2026 Bombblingm. All Rights Reserved.</p>
+  <p>Support: support@bombblingmrbx.abrdns.com</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
