@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Status.io</title>
+
+  <script>
+    const url = "https://app.status.io/internal_view/6a2062259c2c470603e749d2";
+
+    const lang = navigator.language || navigator.userLanguage;
+
+    const texts = {
+      de: "Du wirst weitergeleitet...",
+      en: "You are being redirected...",
+      default: "Redirecting..."
+    };
+
+    let msg = texts.default;
+
+    if (lang.startsWith("de")) msg = texts.de;
+    else if (lang.startsWith("en")) msg = texts.en;
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("msg").textContent = msg;
+    });
+
+    // sofortige Weiterleitung
+    window.location.replace(url);
+  </script>
+</head>
+
+<body>
+  <p id="msg">Redirecting...</p>
+</body>
+</html>
