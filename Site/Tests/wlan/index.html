@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netzwerk Diagnose</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
+    padding:20px;
+}
+
+.box{
+    background:#222;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+button{
+    padding:10px;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>Netzwerk Diagnose</h1>
+
+<div class="box">
+    <h3>Status</h3>
+    <p id="status">Lade...</p>
+</div>
+
+<div class="box">
+    <h3>Verbindung</h3>
+    <p id="type">Unbekannt</p>
+</div>
+
+<div class="box">
+    <h3>Ping Test</h3>
+    <button onclick="pingTest()">Ping messen</button>
+    <p id="ping">-</p>
+</div>
+
+<div class="box">
+    <h3>Öffentliche IP</h3>
+    <p id="ip">Lade...</p>
+</div>
+
+<div class="box">
+    <h3>Browser Informationen</h3>
+    <pre id="browser"></pre>
+</div>
+
+<h2>Copyright</h2>
+<p>© 2026 Dein Projekt. Alle Rechte vorbehalten.</p>
+
+<h2>Nutzungsbedingungen</h2>
+<p>
+Die Webseite dient ausschließlich zu Diagnosezwecken.
+Eine Gewähr für die Richtigkeit der Daten wird nicht übernommen.
+</p>
+
+<h2>Datenschutzbestimmungen</h2>
+<p>
+Es werden keine personenbezogenen Daten gespeichert.
+Netzwerkinformationen werden nur lokal verarbeitet.
+</p>
+
+
+<p>
+
+    <a href="https://github.com/hackerIP54/Website/blob/main/Site/Tests/wlan/LICENSE">LICENSE</a>
+
+</p>
+
+<script>
+function updateStatus(){
+    document.getElementById("status").textContent =
+        navigator.onLine ? "Online" : "Offline";
+}
+
+async function pingTest(){
+    const start = performance.now();
+
+    try{
+        await fetch("https://www.google.com/favicon.ico?"+Date.now(),{
+            mode:"no-cors"
+        });
+
+        const ping = Math.round(performance.now()-start);
+
+        document.getElementById("ping").textContent =
+            ping+" ms";
+    }catch{
+        document.getElementById("ping").textContent =
+            "Fehler";
+    }
+}
+
+async function getIP(){
+    try{
+        const res = await fetch("https://api.ipify.org?format=json");
+        const data = await res.json();
+
+        document.getElementById("ip").textContent =
+            data.ip;
+    }catch{
+        document.getElementById("ip").textContent =
+            "Nicht verfügbar";
+    }
+}
+
+function browserInfo(){
+    const info = {
+        UserAgent:navigator.userAgent,
+        Sprache:navigator.language,
+        Plattform:navigator.platform,
+        Cookies:navigator.cookieEnabled,
+        Online:navigator.onLine
+    };
+
+    document.getElementById("browser").textContent =
+        JSON.stringify(info,null,2);
+}
+
+if(navigator.connection){
+    document.getElementById("type").textContent =
+        `
+Typ: ${navigator.connection.effectiveType}
+Downlink: ${navigator.connection.downlink} Mbit/s
+RTT: ${navigator.connection.rtt} ms
+`;
+}
+
+updateStatus();
+browserInfo();
+getIP();
+
+setInterval(updateStatus,1000);
+</script>
+
+</body>
+</html>
